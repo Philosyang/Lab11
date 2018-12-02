@@ -11,8 +11,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.widget.TextView;
 
 /**
  * Main class for our UI design lab.
@@ -58,7 +61,7 @@ public final class MainActivity extends AppCompatActivity {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "https://pokemontcg.io/cards/" + id,
+                    "https://api.pokemontcg.io/v1/cards/" + id,
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -87,7 +90,14 @@ public final class MainActivity extends AppCompatActivity {
         try {
             Log.d(TAG, response.toString(2));
             // Example of how to pull a field off the returned JSON object
-            Log.i(TAG, response.get("name").toString());
+            JSONObject card = response.getJSONObject("card");
+            JSONArray weaknesses = card.getJSONArray("weaknesses");
+            TextView pokemonName = findViewById(R.id.pokemonName);
+            Log.i(TAG, card.get("name").toString());
+            pokemonName.setText(card.get("name").toString());
+            TextView weakMultiplier = findViewById(R.id.weakMultiplier);
+            JSONObject temp = weaknesses.getJSONObject(0);
+            weakMultiplier.setText(temp.get("value").toString());
         } catch (JSONException ignored) { }
     }
 }
