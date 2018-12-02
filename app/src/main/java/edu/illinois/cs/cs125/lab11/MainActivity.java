@@ -19,7 +19,7 @@ import org.json.JSONObject;
  */
 public final class MainActivity extends AppCompatActivity {
     /** Default logging tag for messages from the main activity. */
-    private static final String TAG = "Lab11:Main";
+    private static final String TAG = "Pokemon-TCG:Main";
 
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
@@ -38,7 +38,7 @@ public final class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        startAPICall("192.17.96.8");
+        startAPICall("sm8-19");
     }
 
     /**
@@ -52,13 +52,13 @@ public final class MainActivity extends AppCompatActivity {
     /**
      * Make a call to the IP geolocation API.
      *
-     * @param ipAddress IP address to look up
+     * @param id one Pokemon's ID.
      */
-    void startAPICall(final String ipAddress) {
+    void startAPICall(final String id) {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "https://ipinfo.io/" + ipAddress + "/json",
+                    "https://pokemontcg.io/cards/" + id,
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -87,7 +87,7 @@ public final class MainActivity extends AppCompatActivity {
         try {
             Log.d(TAG, response.toString(2));
             // Example of how to pull a field off the returned JSON object
-            Log.i(TAG, response.get("hostname").toString());
+            Log.i(TAG, response.get("name").toString());
         } catch (JSONException ignored) { }
     }
 }
