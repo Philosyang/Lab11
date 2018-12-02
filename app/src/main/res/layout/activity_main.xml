@@ -63,7 +63,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/blank_filler2"
+                android:id="@+id/blank_filler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="32"
@@ -112,8 +112,7 @@
                             android:id="@+id/weakMultiplier"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:text="x2" />
+                            android:layout_weight="3" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -153,8 +152,7 @@
                             android:id="@+id/resMultiplier"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:text="-15" />
+                            android:layout_weight="3" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -194,8 +192,7 @@
                             android:id="@+id/retreatMultiplier"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:text="x3" />
+                            android:layout_weight="3" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -279,7 +276,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Time Distortion"
                             android:textAppearance="@style/TextAppearance.AppCompat" />
 
                         <TextView
@@ -287,7 +283,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
-                            android:text="15"
                             android:textAppearance="@style/TextAppearance.AppCompat" />
 
                     </LinearLayout>
@@ -299,7 +294,6 @@
                         android:layout_weight="9"
                         android:ems="10"
                         android:inputType="textMultiLine"
-                        android:text="Deal 15 damage from this Pokémon. Devolve any number of your Benched Pokémon as many times as you like. Put each Evolution card removed this way into your hand."
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
                 </LinearLayout>
@@ -328,10 +322,9 @@
 
                         <TextView
                             android:id="@+id/pokemonMove2Name"
-                            android:layout_width="match_parent"
+                            android:layout_width="115dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="Leech Seed"
                             android:textAppearance="@style/TextAppearance.AppCompat" />
 
                         <TextView
@@ -339,7 +332,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
-                            android:text="40"
                             android:textAppearance="@style/TextAppearance.AppCompat" />
 
                     </LinearLayout>
@@ -351,7 +343,6 @@
                         android:layout_weight="9"
                         android:ems="10"
                         android:inputType="textMultiLine"
-                        android:text="Deal 40 damage and heal 20 damage from this Pokémon."
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
                 </LinearLayout>
