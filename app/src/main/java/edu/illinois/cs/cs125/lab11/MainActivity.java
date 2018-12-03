@@ -97,7 +97,7 @@ public final class MainActivity extends AppCompatActivity {
             // Display pokemonName.
             TextView pokemonName = findViewById(R.id.pokemonName);
             pokemonName.setText(card.get("name").toString());
-            Log.i(TAG, card.get("name").toString());
+            Log.i(TAG, "pokemonName = " + card.get("name").toString());
             // Display weakMultiplier.
             TextView weakMultiplier = findViewById(R.id.weakMultiplier);
             JSONObject tempA = weaknesses.getJSONObject(0);

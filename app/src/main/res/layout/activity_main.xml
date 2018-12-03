@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Pokemon Name"
+                    android:text="N/A"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
             </LinearLayout>
@@ -112,7 +112,8 @@
                             android:id="@+id/weakMultiplier"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3" />
+                            android:layout_weight="3"
+                            android:text="N/A" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -152,7 +153,8 @@
                             android:id="@+id/resMultiplier"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3" />
+                            android:layout_weight="3"
+                            android:text="N/A" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -192,7 +194,8 @@
                             android:id="@+id/retreatMultiplier"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3" />
+                            android:layout_weight="3"
+                            android:text="N/A" />
                     </LinearLayout>
 
                 </LinearLayout>
