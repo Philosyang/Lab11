@@ -93,6 +93,7 @@ public final class MainActivity extends AppCompatActivity {
             JSONObject card = response.getJSONObject("card");
             // Create JSONArrays.
             JSONArray weaknesses = card.getJSONArray("weaknesses");
+            JSONArray resistances = card.getJSONArray("resistances");
             // Display pokemonName.
             TextView pokemonName = findViewById(R.id.pokemonName);
             pokemonName.setText(card.get("name").toString());
@@ -101,7 +102,12 @@ public final class MainActivity extends AppCompatActivity {
             TextView weakMultiplier = findViewById(R.id.weakMultiplier);
             JSONObject tempA = weaknesses.getJSONObject(0);
             weakMultiplier.setText(tempA.get("value").toString());
-            Log.i(TAG, tempA.get("value").toString());
+            Log.i(TAG, "weakMultiplier = " + tempA.get("value").toString());
+            // Display resMultiplier.
+            TextView resMultiplier = findViewById(R.id.resMultiplier);
+            JSONObject tempB = resistances.getJSONObject(0);
+            resMultiplier.setText(tempB.get("value").toString());
+            Log.i(TAG, "resMultiplier = " + tempB.get("value").toString());
         } catch (JSONException ignored) { }
     }
 }
