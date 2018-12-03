@@ -41,7 +41,7 @@ public final class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        startAPICall("sm8-19");
+        startAPICall("sm75-57");
     }
 
     /**
@@ -53,7 +53,7 @@ public final class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Make a call to the IP geolocation API.
+     * Make a call to the PTCG API.
      *
      * @param id one Pokemon's ID.
      */
@@ -82,22 +82,26 @@ public final class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Handle the response from our IP geolocation API.
+     * Handle the response from PTCG API.
      *
-     * @param response response from our IP geolocation API.
+     * @param response response from PTCG API.
      */
     void apiCallDone(final JSONObject response) {
         try {
             Log.d(TAG, response.toString(2));
-            // Example of how to pull a field off the returned JSON object
+            // Create JSONObject card.
             JSONObject card = response.getJSONObject("card");
+            // Create JSONArrays.
             JSONArray weaknesses = card.getJSONArray("weaknesses");
+            // Display pokemonName.
             TextView pokemonName = findViewById(R.id.pokemonName);
-            Log.i(TAG, card.get("name").toString());
             pokemonName.setText(card.get("name").toString());
+            Log.i(TAG, card.get("name").toString());
+            // Display weakMultiplier.
             TextView weakMultiplier = findViewById(R.id.weakMultiplier);
-            JSONObject temp = weaknesses.getJSONObject(0);
-            weakMultiplier.setText(temp.get("value").toString());
+            JSONObject tempA = weaknesses.getJSONObject(0);
+            weakMultiplier.setText(tempA.get("value").toString());
+            Log.i(TAG, tempA.get("value").toString());
         } catch (JSONException ignored) { }
     }
 }
