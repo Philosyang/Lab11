@@ -10,11 +10,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
@@ -43,6 +45,11 @@ public final class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         setContentView(R.layout.activity_main);
+        // Display card back.
+        ImageView temp = findViewById(R.id.pokemonImage);
+        Picasso.with(MainActivity.this).
+                load("https://crystal-cdn2.crystalcommerce.com/"
+                        + "photos/63287/pkm-cardback.png").into(temp);
         // pop up a Toast to show that the app is ready.
         Toast.makeText(MainActivity.this,
                 "Click on the button to get started.", Toast.LENGTH_LONG).show();
@@ -53,8 +60,11 @@ public final class MainActivity extends AppCompatActivity {
                 // pop up a Toast to provide feedback after pressing the button.
                 Toast.makeText(MainActivity.this,
                         "Fetching data...", Toast.LENGTH_SHORT).show();
-                // need to implement a random id generator below.
-                startAPICall("sm75-57");
+                // random ID generator.
+                String id = "sm75-" + (int) (Math.random() * 70);
+                Log.d(TAG, id);
+                // start API call.
+                startAPICall(id);
             }
         });
     }
@@ -106,39 +116,54 @@ public final class MainActivity extends AppCompatActivity {
             Log.d(TAG, response.toString(2));
             // Create JSONObject card.
             JSONObject card = response.getJSONObject("card");
-            // Create JSONArrays.
-            JSONArray weaknesses = card.getJSONArray("weaknesses");
-            JSONArray resistances = card.getJSONArray("resistances");
-            JSONArray retreatCost = card.getJSONArray("retreatCost");
             // Display pokemonName.
             TextView pokemonName = findViewById(R.id.pokemonName);
             pokemonName.setText(card.get("name").toString());
             Log.i(TAG, "pokemonName = " + card.get("name").toString());
             // Display weakMultiplier.
-            TextView weakMultiplier = findViewById(R.id.weakMultiplier);
-            JSONObject tempA = weaknesses.getJSONObject(0);
-            weakMultiplier.setText(tempA.get("value").toString());
-            Log.i(TAG, "weakMultiplier = " + tempA.get("value").toString());
+            try {
+                JSONArray weaknesses = card.getJSONArray("weaknesses");
+                TextView weakMultiplier = findViewById(R.id.weakMultiplier);
+                JSONObject tempA = weaknesses.getJSONObject(0);
+                weakMultiplier.setText(tempA.get("value").toString());
+                Log.i(TAG, "weakMultiplier = " + tempA.get("value").toString());
+            } catch (Exception e) {
+                TextView weakMultiplier = findViewById(R.id.weakMultiplier);
+                weakMultiplier.setText("N/A");
+            }
             // Display resMultiplier.
-            TextView resMultiplier = findViewById(R.id.resMultiplier);
-            JSONObject tempB = resistances.getJSONObject(0);
-            resMultiplier.setText(tempB.get("value").toString());
-            Log.i(TAG, "resMultiplier = " + tempB.get("value").toString());
-            // Display retreatCost (WIP).
-            TextView retreatMultiplier = findViewById(R.id.retreatMultiplier);
-            int tempC = retreatCost.length();
-            retreatMultiplier.setText("x" + tempC); // any workarounds?
-            Log.i(TAG, "retreatMultiplier = x" + tempC);
+            try {
+                JSONArray resistances = card.getJSONArray("resistances");
+                TextView resMultiplier = findViewById(R.id.resMultiplier);
+                JSONObject tempB = resistances.getJSONObject(0);
+                resMultiplier.setText(tempB.get("value").toString());
+                Log.i(TAG, "resMultiplier = " + tempB.get("value").toString());
+            } catch (Exception e) {
+                TextView resMultiplier = findViewById(R.id.resMultiplier);
+                resMultiplier.setText("N/A");
+            }
+            // Display retreatCost.
+            try {
+                JSONArray retreatCost = card.getJSONArray("retreatCost");
+                TextView retreatMultiplier = findViewById(R.id.retreatMultiplier);
+                int tempC = retreatCost.length();
+                retreatMultiplier.setText("×" + tempC); // any workarounds?
+                Log.i(TAG, "retreatMultiplier = ×" + tempC);
+            } catch (Exception e) {
+                TextView retreatMultiplier = findViewById(R.id.retreatMultiplier);
+                retreatMultiplier.setText("N/A");
+            }
+            // Display pokemonImage.
+            ImageView tempD = findViewById(R.id.pokemonImage);
+            Picasso.with(MainActivity.this).load(card.get("imageUrlHiRes").toString()).into(tempD);
             // Display a success Toast.
             Toast.makeText(MainActivity.this,
                     "Fetch successful.", Toast.LENGTH_SHORT).show();
         } catch (JSONException e) {
-            Log.i(TAG, "caught ERROR! more info below.");
-            // Display a failing Toast (WIP).
-            //Toast.makeText(MainActivity.this,
-            //        "Something went wrong!", Toast.LENGTH_SHORT).show();
-            // failed to log error (WIP).
-            e.printStackTrace();
+            Log.i(TAG, "caught ERROR! " + e.toString());
+            // Display a failing Toast.
+            Toast.makeText(MainActivity.this,
+                    "Something went wrong!", Toast.LENGTH_SHORT).show();
         }
     }
 }
