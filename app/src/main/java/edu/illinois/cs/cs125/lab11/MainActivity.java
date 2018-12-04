@@ -16,6 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.widget.TextView;
+import android.widget.Button;
+import android.view.View;
 
 /**
  * Main class for our UI design lab.
@@ -40,8 +42,14 @@ public final class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         setContentView(R.layout.activity_main);
-
-        startAPICall("sm75-57");
+        Button button = findViewById(R.id.pressForPokemon);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                Log.d(TAG, "button clicked");
+                startAPICall("sm75-57");
+            }
+        });
+        //startAPICall("sm75-57");
     }
 
     /**
