@@ -94,6 +94,7 @@ public final class MainActivity extends AppCompatActivity {
             // Create JSONArrays.
             JSONArray weaknesses = card.getJSONArray("weaknesses");
             JSONArray resistances = card.getJSONArray("resistances");
+            JSONArray retreatCost = card.getJSONArray("retreatCost");
             // Display pokemonName.
             TextView pokemonName = findViewById(R.id.pokemonName);
             pokemonName.setText(card.get("name").toString());
@@ -108,6 +109,14 @@ public final class MainActivity extends AppCompatActivity {
             JSONObject tempB = resistances.getJSONObject(0);
             resMultiplier.setText(tempB.get("value").toString());
             Log.i(TAG, "resMultiplier = " + tempB.get("value").toString());
-        } catch (JSONException ignored) { }
+            // Display retreatCost.
+            TextView retreatMultiplier = findViewById(R.id.retreatMultiplier);
+            JSONObject tempC = retreatCost.getJSONObject(0);
+            retreatMultiplier.setText(tempC.toString());
+            Log.i(TAG, "retreatMultiplier = " + tempC.toString());
+        } catch (JSONException err) {
+            Log.i(TAG, "caught ERROR! more info below.");
+            err.printStackTrace();
+        }
     }
 }
