@@ -120,6 +120,19 @@ public final class MainActivity extends AppCompatActivity {
             TextView pokemonName = findViewById(R.id.pokemonName);
             pokemonName.setText(card.get("name").toString());
             Log.i(TAG, "pokemonName = " + card.get("name").toString());
+            // Display HP.
+            try {
+                TextView hP = findViewById(R.id.hP);
+                hP.setText("HP");
+                TextView hPnumber = findViewById(R.id.hPnumber);
+                hPnumber.setText(card.get("hp").toString());
+                Log.i(TAG, "HP = " + card.get("hp").toString());
+            } catch (Exception e) {
+                TextView hP = findViewById(R.id.hP);
+                hP.setText("");
+                TextView hPnumber = findViewById(R.id.hPnumber);
+                hPnumber.setText("");
+            }
             // Display weakMultiplier.
             try {
                 JSONArray weaknesses = card.getJSONArray("weaknesses");
