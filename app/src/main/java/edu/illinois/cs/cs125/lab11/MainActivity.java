@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
 import android.view.View;
 
 /**
@@ -42,14 +43,20 @@ public final class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         setContentView(R.layout.activity_main);
+        // pop up a Toast to show that the app is ready.
+        Toast.makeText(MainActivity.this,
+                "Click on the button to get started.", Toast.LENGTH_LONG).show();
         Button button = findViewById(R.id.pressForPokemon);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 Log.d(TAG, "button clicked");
+                // pop up a Toast to provide feedback after pressing the button.
+                Toast.makeText(MainActivity.this,
+                        "Fetching data...", Toast.LENGTH_SHORT).show();
+                // need to implement a random id generator below.
                 startAPICall("sm75-57");
             }
         });
-        //startAPICall("sm75-57");
     }
 
     /**
@@ -117,14 +124,21 @@ public final class MainActivity extends AppCompatActivity {
             JSONObject tempB = resistances.getJSONObject(0);
             resMultiplier.setText(tempB.get("value").toString());
             Log.i(TAG, "resMultiplier = " + tempB.get("value").toString());
-            // Display retreatCost.
+            // Display retreatCost (WIP).
             TextView retreatMultiplier = findViewById(R.id.retreatMultiplier);
-            JSONObject tempC = retreatCost.getJSONObject(0);
-            retreatMultiplier.setText(tempC.toString());
-            Log.i(TAG, "retreatMultiplier = " + tempC.toString());
-        } catch (JSONException err) {
+            int tempC = retreatCost.length();
+            retreatMultiplier.setText("x" + tempC); // any workarounds?
+            Log.i(TAG, "retreatMultiplier = x" + tempC);
+            // Display a success Toast.
+            Toast.makeText(MainActivity.this,
+                    "Fetch successful.", Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
             Log.i(TAG, "caught ERROR! more info below.");
-            err.printStackTrace();
+            // Display a failing Toast (WIP).
+            //Toast.makeText(MainActivity.this,
+            //        "Something went wrong!", Toast.LENGTH_SHORT).show();
+            // failed to log error (WIP).
+            e.printStackTrace();
         }
     }
 }
