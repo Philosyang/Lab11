@@ -174,7 +174,7 @@ public final class MainActivity extends AppCompatActivity {
                 TextView move1Body = findViewById(R.id.move1Desc);
                 TextView move1Damage = findViewById(R.id.pokemonMove1Atk);
                 JSONObject move1Data = moves.getJSONObject(0);
-                move1Name.setText(move1Data.get("name").toString()); // any workarounds?
+                move1Name.setText(move1Data.get("name").toString());
                 move1Body.setText(move1Data.get("text").toString());
                 move1Damage.setText(move1Data.get("damage").toString());
                 Log.i(TAG, "Name of move 1 is" + move1Data.get("name").toString());
@@ -183,8 +183,8 @@ public final class MainActivity extends AppCompatActivity {
                 TextView move1Body = findViewById(R.id.move1Desc);
                 TextView move1Damage = findViewById(R.id.pokemonMove1Atk);
                 move1Name.setText("N/A");
-                move1Body.setText("N/A");
-                move1Damage.setText("N/A");
+                move1Body.setText("");
+                move1Damage.setText("");
             }
             // Display Move 2.
             try {
@@ -192,7 +192,7 @@ public final class MainActivity extends AppCompatActivity {
                 TextView move2Body = findViewById(R.id.move2Desc);
                 TextView move2Damage = findViewById(R.id.pokemonMove2Atk);
                 JSONObject move2Data = moves.getJSONObject(1);
-                move2Name.setText(move2Data.get("name").toString()); // any workarounds?
+                move2Name.setText(move2Data.get("name").toString());
                 move2Body.setText(move2Data.get("text").toString());
                 move2Damage.setText(move2Data.get("damage").toString());
                 Log.i(TAG, "Name of move 2 is" + move2Data.get("name").toString());
@@ -201,8 +201,8 @@ public final class MainActivity extends AppCompatActivity {
                 TextView move2Body = findViewById(R.id.move2Desc);
                 TextView move2Damage = findViewById(R.id.pokemonMove2Atk);
                 move2Name.setText("N/A");
-                move2Body.setText("N/A");
-                move2Damage.setText("N/A");
+                move2Body.setText("");
+                move2Damage.setText("");
             }
             // Display Move 3.
             try {
@@ -210,7 +210,7 @@ public final class MainActivity extends AppCompatActivity {
                 TextView move3Body = findViewById(R.id.move3Desc);
                 TextView move3Damage = findViewById(R.id.pokemonMove3Atk);
                 JSONObject move3Data = moves.getJSONObject(2);
-                move3Name.setText(move3Data.get("name").toString()); // any workarounds?
+                move3Name.setText(move3Data.get("name").toString());
                 move3Body.setText(move3Data.get("text").toString());
                 move3Damage.setText(move3Data.get("damage").toString());
                 Log.i(TAG, "Name of move 1 is" + move3Data.get("name").toString());
@@ -219,8 +219,8 @@ public final class MainActivity extends AppCompatActivity {
                 TextView move3Body = findViewById(R.id.move3Desc);
                 TextView move3Damage = findViewById(R.id.pokemonMove3Atk);
                 move3Name.setText("N/A");
-                move3Body.setText("N/A");
-                move3Damage.setText("N/A");
+                move3Body.setText("");
+                move3Damage.setText("");
             }
             // Display pokemonImage.
             ImageView tempD = findViewById(R.id.pokemonImage);
