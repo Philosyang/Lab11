@@ -166,6 +166,62 @@ public final class MainActivity extends AppCompatActivity {
                 TextView retreatMultiplier = findViewById(R.id.retreatMultiplier);
                 retreatMultiplier.setText("N/A");
             }
+            // Get Moves.
+            JSONArray moves = card.getJSONArray("attacks");
+            // Display Move 1.
+            try {
+                TextView move1Name = findViewById(R.id.pokemonMove1Name);
+                TextView move1Body = findViewById(R.id.move1Desc);
+                TextView move1Damage = findViewById(R.id.pokemonMove1Atk);
+                JSONObject move1Data = moves.getJSONObject(0);
+                move1Name.setText(move1Data.get("name").toString()); // any workarounds?
+                move1Body.setText(move1Data.get("text").toString());
+                move1Damage.setText(move1Data.get("damage").toString());
+                Log.i(TAG, "Name of move 1 is" + move1Data.get("name").toString());
+            } catch (Exception e) {
+                TextView move1Name = findViewById(R.id.pokemonMove1Name);
+                TextView move1Body = findViewById(R.id.move1Desc);
+                TextView move1Damage = findViewById(R.id.pokemonMove1Atk);
+                move1Name.setText("N/A");
+                move1Body.setText("N/A");
+                move1Damage.setText("N/A");
+            }
+            // Display Move 2.
+            try {
+                TextView move2Name = findViewById(R.id.pokemonMove2Name);
+                TextView move2Body = findViewById(R.id.move2Desc);
+                TextView move2Damage = findViewById(R.id.pokemonMove2Atk);
+                JSONObject move2Data = moves.getJSONObject(1);
+                move2Name.setText(move2Data.get("name").toString()); // any workarounds?
+                move2Body.setText(move2Data.get("text").toString());
+                move2Damage.setText(move2Data.get("damage").toString());
+                Log.i(TAG, "Name of move 2 is" + move2Data.get("name").toString());
+            } catch (Exception e) {
+                TextView move2Name = findViewById(R.id.pokemonMove2Name);
+                TextView move2Body = findViewById(R.id.move2Desc);
+                TextView move2Damage = findViewById(R.id.pokemonMove2Atk);
+                move2Name.setText("N/A");
+                move2Body.setText("N/A");
+                move2Damage.setText("N/A");
+            }
+            // Display Move 3.
+            try {
+                TextView move3Name = findViewById(R.id.pokemonMove3Name);
+                TextView move3Body = findViewById(R.id.move3Desc);
+                TextView move3Damage = findViewById(R.id.pokemonMove3Atk);
+                JSONObject move3Data = moves.getJSONObject(2);
+                move3Name.setText(move3Data.get("name").toString()); // any workarounds?
+                move3Body.setText(move3Data.get("text").toString());
+                move3Damage.setText(move3Data.get("damage").toString());
+                Log.i(TAG, "Name of move 1 is" + move3Data.get("name").toString());
+            } catch (Exception e) {
+                TextView move3Name = findViewById(R.id.pokemonMove3Name);
+                TextView move3Body = findViewById(R.id.move3Desc);
+                TextView move3Damage = findViewById(R.id.pokemonMove3Atk);
+                move3Name.setText("N/A");
+                move3Body.setText("N/A");
+                move3Damage.setText("N/A");
+            }
             // Display pokemonImage.
             ImageView tempD = findViewById(R.id.pokemonImage);
             Picasso.with(MainActivity.this).load(card.get("imageUrlHiRes").toString()).into(tempD);
