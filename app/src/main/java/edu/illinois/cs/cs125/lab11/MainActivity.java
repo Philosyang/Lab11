@@ -105,7 +105,6 @@ public final class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     /**
      * Handle the response from PTCG API.
      *
@@ -120,6 +119,16 @@ public final class MainActivity extends AppCompatActivity {
             TextView pokemonName = findViewById(R.id.pokemonName);
             pokemonName.setText(card.get("name").toString());
             Log.i(TAG, "pokemonName = " + card.get("name").toString());
+            // Display type.
+            ImageView pokemonType = findViewById(R.id.pokemonType);
+            JSONArray typeData = card.getJSONArray("types");
+            try {
+                pokemonType.setImageResource(toConstant(typeData.getString(0)));
+                Log.d(TAG, "successfully loaded image at " + "res/drawable/type_"
+                        + typeData.getString(0).toLowerCase() + ".png");
+            } catch (Exception e) {
+                Log.d(TAG, "Icon error: " + e.toString());
+            }
             // Display HP.
             try {
                 TextView hP = findViewById(R.id.hP);
@@ -233,6 +242,37 @@ public final class MainActivity extends AppCompatActivity {
             // Display a failing Toast.
             Toast.makeText(MainActivity.this,
                     "Something went wrong!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**Change string to int constants.
+     * @param str the string to be changed.
+     * @return the int constant.
+     */
+    int toConstant(final String str) {
+        switch (str) {
+            case "Fire":
+                return R.drawable.type_fire;
+            case "Water":
+                return R.drawable.type_water;
+            case "Grass":
+                return R.drawable.type_grass;
+            case "Electric":
+                return R.drawable.type_electric;
+            case "Fighting":
+                return R.drawable.type_fighting;
+            case "Psychic":
+                return R.drawable.type_psychic;
+            case "Normal":
+                return R.drawable.type_normal;
+            case "Steel":
+                return R.drawable.type_steel;
+            case "Dark":
+                return R.drawable.type_dark;
+            case "Dragon":
+                return R.drawable.type_dragon;
+            default:
+                return 0;
         }
     }
 }
