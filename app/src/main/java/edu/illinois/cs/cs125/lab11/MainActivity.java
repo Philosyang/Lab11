@@ -199,6 +199,13 @@ public final class MainActivity extends AppCompatActivity {
                 moves = null;
             }
             // Display Move 1.
+            // Icon part.
+            try {
+
+            } catch (Exception e) {
+                
+            }
+            // Text part.
             try {
                 TextView move1Name = findViewById(R.id.pokemonMove1Name);
                 TextView move1Body = findViewById(R.id.move1Desc);
