@@ -1,5 +1,6 @@
 package edu.illinois.cs.cs125.lab11;
 
+//import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -121,13 +122,15 @@ public final class MainActivity extends AppCompatActivity {
             Log.i(TAG, "pokemonName = " + card.get("name").toString());
             // Display type.
             ImageView pokemonType = findViewById(R.id.pokemonType);
-            JSONArray typeData = card.getJSONArray("types");
             try {
+                JSONArray typeData = card.getJSONArray("types");
                 pokemonType.setImageResource(toConstant(typeData.getString(0)));
                 Log.d(TAG, "successfully loaded image at " + "res/drawable/type_"
                         + typeData.getString(0).toLowerCase() + ".png");
             } catch (Exception e) {
+                pokemonType.setImageResource(0);
                 Log.d(TAG, "Icon error: " + e.toString());
+
             }
             // Display HP.
             try {
@@ -146,37 +149,55 @@ public final class MainActivity extends AppCompatActivity {
             try {
                 JSONArray weaknesses = card.getJSONArray("weaknesses");
                 TextView weakMultiplier = findViewById(R.id.weakMultiplier);
+                ImageView weakType = findViewById(R.id.weaknessType);
                 JSONObject tempA = weaknesses.getJSONObject(0);
                 weakMultiplier.setText(tempA.get("value").toString());
+                weakType.setImageResource(toConstant(tempA.get("type").toString()));
                 Log.i(TAG, "weakMultiplier = " + tempA.get("value").toString());
             } catch (Exception e) {
                 TextView weakMultiplier = findViewById(R.id.weakMultiplier);
+                ImageView weakType = findViewById(R.id.weaknessType);
                 weakMultiplier.setText("N/A");
+                weakType.setImageResource(0);
             }
             // Display resMultiplier.
             try {
                 JSONArray resistances = card.getJSONArray("resistances");
                 TextView resMultiplier = findViewById(R.id.resMultiplier);
+                ImageView resType = findViewById(R.id.resType);
                 JSONObject tempB = resistances.getJSONObject(0);
                 resMultiplier.setText(tempB.get("value").toString());
+                resType.setImageResource(toConstant(tempB.get("type").toString()));
                 Log.i(TAG, "resMultiplier = " + tempB.get("value").toString());
             } catch (Exception e) {
                 TextView resMultiplier = findViewById(R.id.resMultiplier);
+                ImageView resType = findViewById(R.id.resType);
                 resMultiplier.setText("N/A");
+                resType.setImageResource(0);
             }
             // Display retreatCost.
             try {
                 JSONArray retreatCost = card.getJSONArray("retreatCost");
                 TextView retreatMultiplier = findViewById(R.id.retreatMultiplier);
+                ImageView retreatType = findViewById(R.id.retreatType);
                 int tempC = retreatCost.length();
                 retreatMultiplier.setText("×" + tempC); // any workarounds?
+                retreatType.setImageResource(toConstant(retreatCost.getString(0)));
                 Log.i(TAG, "retreatMultiplier = ×" + tempC);
             } catch (Exception e) {
                 TextView retreatMultiplier = findViewById(R.id.retreatMultiplier);
+                ImageView retreatType = findViewById(R.id.retreatType);
                 retreatMultiplier.setText("N/A");
+                retreatType.setImageResource(0);
             }
             // Get Moves.
-            JSONArray moves = card.getJSONArray("attacks");
+            JSONArray moves;
+            try {
+                moves = card.getJSONArray("attacks");
+            } catch (Exception e) {
+                Log.d(TAG, "Attack error: " + e.toString());
+                moves = null;
+            }
             // Display Move 1.
             try {
                 TextView move1Name = findViewById(R.id.pokemonMove1Name);
@@ -257,13 +278,13 @@ public final class MainActivity extends AppCompatActivity {
                 return R.drawable.type_water;
             case "Grass":
                 return R.drawable.type_grass;
-            case "Electric":
+            case "Lightning":
                 return R.drawable.type_electric;
             case "Fighting":
                 return R.drawable.type_fighting;
             case "Psychic":
                 return R.drawable.type_psychic;
-            case "Normal":
+            case "Colorless":
                 return R.drawable.type_normal;
             case "Steel":
                 return R.drawable.type_steel;
@@ -271,6 +292,8 @@ public final class MainActivity extends AppCompatActivity {
                 return R.drawable.type_dark;
             case "Dragon":
                 return R.drawable.type_dragon;
+            case "Fairy":
+                return R.drawable.type_fairy;
             default:
                 return 0;
         }
