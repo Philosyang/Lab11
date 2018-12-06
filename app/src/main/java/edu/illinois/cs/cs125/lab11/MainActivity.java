@@ -130,7 +130,6 @@ public final class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 pokemonType.setImageResource(0);
                 Log.d(TAG, "Icon error: " + e.toString());
-
             }
             // Display HP.
             try {
@@ -201,9 +200,24 @@ public final class MainActivity extends AppCompatActivity {
             // Display Move 1.
             // Icon part.
             try {
-
+                ((ImageView) findViewById(R.id.pokemonMove1Icon1)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(0).getJSONArray("cost").getString(0)));
             } catch (Exception e) {
-                
+                ((ImageView) findViewById(R.id.pokemonMove1Icon1)).setImageResource(0);
+            }
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove1Icon2)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(0).getJSONArray("cost").getString(1)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove1Icon2)).setImageResource(0);
+            }
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove1Icon1)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(0).getJSONArray("cost").getString(2)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove1Icon1)).setImageResource(0);
+            }
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove1Icon1)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(0).getJSONArray("cost").getString(3)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove1Icon1)).setImageResource(0);
             }
             // Text part.
             try {
@@ -224,6 +238,28 @@ public final class MainActivity extends AppCompatActivity {
                 move1Damage.setText("");
             }
             // Display Move 2.
+            // Icon part.
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove2Icon1)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(1).getJSONArray("cost").getString(0)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove2Icon1)).setImageResource(0);
+            }
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove2Icon2)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(1).getJSONArray("cost").getString(1)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove2Icon2)).setImageResource(0);
+            }
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove2Icon3)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(1).getJSONArray("cost").getString(2)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove2Icon3)).setImageResource(0);
+            }
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove2Icon4)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(1).getJSONArray("cost").getString(3)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove2Icon4)).setImageResource(0);
+            }
+            // Text part.
             try {
                 TextView move2Name = findViewById(R.id.pokemonMove2Name);
                 TextView move2Body = findViewById(R.id.move2Desc);
@@ -242,6 +278,28 @@ public final class MainActivity extends AppCompatActivity {
                 move2Damage.setText("");
             }
             // Display Move 3.
+            // Icon part.
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove3Icon1)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(2).getJSONArray("cost").getString(0)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove3Icon1)).setImageResource(0);
+            }
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove3Icon2)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(2).getJSONArray("cost").getString(1)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove3Icon2)).setImageResource(0);
+            }
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove3Icon3)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(2).getJSONArray("cost").getString(2)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove3Icon3)).setImageResource(0);
+            }
+            try {
+                ((ImageView) findViewById(R.id.pokemonMove3Icon4)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(2).getJSONArray("cost").getString(3)));
+            } catch (Exception e) {
+                ((ImageView) findViewById(R.id.pokemonMove3Icon4)).setImageResource(0);
+            }
+            // Text part.
             try {
                 TextView move3Name = findViewById(R.id.pokemonMove3Name);
                 TextView move3Body = findViewById(R.id.move3Desc);
