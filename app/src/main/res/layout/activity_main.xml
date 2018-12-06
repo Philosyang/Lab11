@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -51,6 +52,13 @@
                     android:layout_height="20dp"
                     android:layout_weight="1"
                     tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/blank_filler2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="  " />
 
                 <TextView
                     android:id="@+id/pokemonName"
@@ -124,16 +132,14 @@
 
                         <ImageView
                             android:id="@+id/weaknessType"
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_weight="2"
                             tools:srcCompat="@tools:sample/avatars" />
 
                         <TextView
                             android:id="@+id/weakMultiplier"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
                             android:text="N/A" />
                     </LinearLayout>
 
@@ -165,16 +171,14 @@
 
                         <ImageView
                             android:id="@+id/resType"
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_weight="2"
                             tools:srcCompat="@tools:sample/avatars" />
 
                         <TextView
                             android:id="@+id/resMultiplier"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
                             android:text="N/A" />
                     </LinearLayout>
 
@@ -206,16 +210,14 @@
 
                         <ImageView
                             android:id="@+id/retreatType"
-                            android:layout_width="match_parent"
+                            android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:layout_weight="2"
                             tools:srcCompat="@tools:sample/avatars" />
 
                         <TextView
                             android:id="@+id/retreatMultiplier"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
                             android:text="N/A" />
                     </LinearLayout>
 
@@ -224,6 +226,11 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/blank_fillerM"
+            android:layout_width="8dp"
+            android:layout_height="match_parent" />
 
         <LinearLayout
             android:id="@+id/MovesRes"
@@ -282,6 +289,28 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/move1Name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|center_horizontal"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/pokemonMove1Name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                            <TextView
+                                android:id="@+id/pokemonMove1Atk"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:textAppearance="@style/TextAppearance.AppCompat" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:id="@+id/move1Icons"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"
@@ -313,28 +342,6 @@
                                 tools:srcCompat="@tools:sample/avatars" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/move1Name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="top|center_horizontal"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/pokemonMove1Name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textAppearance="@style/TextAppearance.AppCompat" />
-
-                            <TextView
-                                android:id="@+id/pokemonMove1Atk"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:textAppearance="@style/TextAppearance.AppCompat" />
-                        </LinearLayout>
-
                         <TextView
                             android:id="@+id/move1Desc"
                             android:layout_width="match_parent"
@@ -358,6 +365,28 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|center_horizontal"
                         android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/move2Name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|center_horizontal"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/pokemonMove2Name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                            <TextView
+                                android:id="@+id/pokemonMove2Atk"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:textAppearance="@style/TextAppearance.AppCompat" />
+                        </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/move2Icons"
@@ -391,28 +420,6 @@
                                 tools:srcCompat="@tools:sample/avatars" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/move2Name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="top|center_horizontal"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/pokemonMove2Name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textAppearance="@style/TextAppearance.AppCompat" />
-
-                            <TextView
-                                android:id="@+id/pokemonMove2Atk"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:textAppearance="@style/TextAppearance.AppCompat" />
-                        </LinearLayout>
-
                         <TextView
                             android:id="@+id/move2Desc"
                             android:layout_width="match_parent"
@@ -436,6 +443,28 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|center_horizontal"
                         android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/move3Name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|center_horizontal"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/pokemonMove3Name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                            <TextView
+                                android:id="@+id/pokemonMove3Atk"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:textAppearance="@style/TextAppearance.AppCompat" />
+                        </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/move3Icons"
@@ -469,28 +498,6 @@
                                 tools:srcCompat="@tools:sample/avatars" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/move3Name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="top|center_horizontal"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/pokemonMove3Name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textAppearance="@style/TextAppearance.AppCompat" />
-
-                            <TextView
-                                android:id="@+id/pokemonMove3Atk"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:textAppearance="@style/TextAppearance.AppCompat" />
-                        </LinearLayout>
-
                         <TextView
                             android:id="@+id/move3Desc"
                             android:layout_width="match_parent"
@@ -503,6 +510,11 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/blank_fillerR"
+            android:layout_width="4dp"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

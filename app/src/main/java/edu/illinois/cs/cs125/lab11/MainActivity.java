@@ -62,7 +62,7 @@ public final class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,
                         "Fetching data...", Toast.LENGTH_SHORT).show();
                 // random ID generator.
-                String id = "sm75-" + (int) (Math.random() * 70);
+                String id = "sm75-" + (int) (Math.random() * 69 + 1);
                 Log.d(TAG, id);
                 // start API call.
                 startAPICall(id);
@@ -210,14 +210,14 @@ public final class MainActivity extends AppCompatActivity {
                 ((ImageView) findViewById(R.id.pokemonMove1Icon2)).setImageResource(0);
             }
             try {
-                ((ImageView) findViewById(R.id.pokemonMove1Icon1)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(0).getJSONArray("cost").getString(2)));
+                ((ImageView) findViewById(R.id.pokemonMove1Icon3)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(0).getJSONArray("cost").getString(2)));
             } catch (Exception e) {
-                ((ImageView) findViewById(R.id.pokemonMove1Icon1)).setImageResource(0);
+                ((ImageView) findViewById(R.id.pokemonMove1Icon3)).setImageResource(0);
             }
             try {
-                ((ImageView) findViewById(R.id.pokemonMove1Icon1)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(0).getJSONArray("cost").getString(3)));
+                ((ImageView) findViewById(R.id.pokemonMove1Icon4)).setImageResource(toConstant(card.getJSONArray("attacks").getJSONObject(0).getJSONArray("cost").getString(3)));
             } catch (Exception e) {
-                ((ImageView) findViewById(R.id.pokemonMove1Icon1)).setImageResource(0);
+                ((ImageView) findViewById(R.id.pokemonMove1Icon4)).setImageResource(0);
             }
             // Text part.
             try {
@@ -228,12 +228,12 @@ public final class MainActivity extends AppCompatActivity {
                 move1Name.setText(move1Data.get("name").toString());
                 move1Body.setText(move1Data.get("text").toString());
                 move1Damage.setText(move1Data.get("damage").toString());
-                Log.i(TAG, "Name of move 1 is" + move1Data.get("name").toString());
+                Log.i(TAG, "Name of move 1 is " + move1Data.get("name").toString());
             } catch (Exception e) {
                 TextView move1Name = findViewById(R.id.pokemonMove1Name);
                 TextView move1Body = findViewById(R.id.move1Desc);
                 TextView move1Damage = findViewById(R.id.pokemonMove1Atk);
-                move1Name.setText("N/A");
+                move1Name.setText("");
                 move1Body.setText("");
                 move1Damage.setText("");
             }
@@ -268,12 +268,12 @@ public final class MainActivity extends AppCompatActivity {
                 move2Name.setText(move2Data.get("name").toString());
                 move2Body.setText(move2Data.get("text").toString());
                 move2Damage.setText(move2Data.get("damage").toString());
-                Log.i(TAG, "Name of move 2 is" + move2Data.get("name").toString());
+                Log.i(TAG, "Name of move 2 is " + move2Data.get("name").toString());
             } catch (Exception e) {
                 TextView move2Name = findViewById(R.id.pokemonMove2Name);
                 TextView move2Body = findViewById(R.id.move2Desc);
                 TextView move2Damage = findViewById(R.id.pokemonMove2Atk);
-                move2Name.setText("N/A");
+                move2Name.setText("");
                 move2Body.setText("");
                 move2Damage.setText("");
             }
@@ -308,12 +308,12 @@ public final class MainActivity extends AppCompatActivity {
                 move3Name.setText(move3Data.get("name").toString());
                 move3Body.setText(move3Data.get("text").toString());
                 move3Damage.setText(move3Data.get("damage").toString());
-                Log.i(TAG, "Name of move 1 is" + move3Data.get("name").toString());
+                Log.i(TAG, "Name of move 3 is " + move3Data.get("name").toString());
             } catch (Exception e) {
                 TextView move3Name = findViewById(R.id.pokemonMove3Name);
                 TextView move3Body = findViewById(R.id.move3Desc);
                 TextView move3Damage = findViewById(R.id.pokemonMove3Atk);
-                move3Name.setText("N/A");
+                move3Name.setText("");
                 move3Body.setText("");
                 move3Damage.setText("");
             }
@@ -322,7 +322,7 @@ public final class MainActivity extends AppCompatActivity {
             Picasso.with(MainActivity.this).load(card.get("imageUrlHiRes").toString()).into(tempD);
             // Display a success Toast.
             Toast.makeText(MainActivity.this,
-                    "Fetch successful.", Toast.LENGTH_SHORT).show();
+                    "√", Toast.LENGTH_SHORT).show();
         } catch (JSONException e) {
             Log.i(TAG, "caught ERROR! " + e.toString());
             // Display a failing Toast.
