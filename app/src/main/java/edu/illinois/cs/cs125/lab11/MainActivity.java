@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 /**
  * Main class for our UI design lab.
@@ -40,7 +42,11 @@ public final class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // remove actionBar.
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_main);
         // Set up the queue for our API requests
         requestQueue = Volley.newRequestQueue(this);
 
