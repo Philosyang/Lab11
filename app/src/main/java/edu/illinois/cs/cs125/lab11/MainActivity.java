@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
@@ -33,7 +34,10 @@ public final class MainActivity extends AppCompatActivity {
 
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
-
+    /** Name variable entered by client **/
+    String readPokemonName;
+    EditText input;
+    Button search;
     /**
      * Run when this activity comes to the foreground.
      *
@@ -42,6 +46,7 @@ public final class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         // remove actionBar.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -49,8 +54,24 @@ public final class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // Set up the queue for our API requests
         requestQueue = Volley.newRequestQueue(this);
-
-        setContentView(R.layout.activity_main);
+        // Set up search bar
+        input = findViewById(R.id.searchBar);
+        search = findViewById(R.id.searchButton);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                readPokemonName = input.getText().toString();
+                Log.d(TAG, "search clicked");
+                // pop up a Toast to provide feedback after pressing the button.
+                Toast.makeText(MainActivity.this,
+                        "Fetching data...", Toast.LENGTH_SHORT).show();
+                // random ID generator.
+                String id = "?name=" + readPokemonName;
+                Log.d(TAG, id);
+                // start API call.
+                startAPICall(id);
+            }
+        });
         // Display card back.
         ImageView temp = findViewById(R.id.pokemonImage);
         Picasso.with(MainActivity.this).
@@ -67,7 +88,7 @@ public final class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,
                         "Fetching data...", Toast.LENGTH_SHORT).show();
                 // random ID generator.
-                String id = "sm75-" + (int) (Math.random() * 69 + 1);
+                String id = "/sm75-" + (int) (Math.random() * 69 + 1);
                 Log.d(TAG, id);
                 // start API call.
                 startAPICall(id);
@@ -92,7 +113,7 @@ public final class MainActivity extends AppCompatActivity {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "https://api.pokemontcg.io/v1/cards/" + id,
+                    "https://api.pokemontcg.io/v1/cards" + id,
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
