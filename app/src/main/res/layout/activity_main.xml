@@ -29,14 +29,16 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="Search here..."
-                android:inputType="text" />
+                android:inputType="text"
+                android:selectAllOnFocus="true"
+                android:singleLine="true" />
 
             <Button
                 android:id="@+id/searchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="🔍" />
+                android:text="GO" />
 
         </LinearLayout>
 
@@ -97,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="N/A"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+                        android:textAppearance="@style/TextAppearance.AppCompat" />
 
                     <TextView
                         android:id="@+id/blank_filler3"
@@ -118,7 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAppearance="@style/TextAppearance.AppCompat" />
+                        android:textAppearance="@style/TextAppearance.Compat.Notification.Info" />
 
                 </LinearLayout>
 
@@ -127,7 +129,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="32"
-                    android:orientation="vertical"></LinearLayout>
+                    android:gravity="top|center_horizontal"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/inSet"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="top|center_horizontal"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/in"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="in"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                        <TextView
+                            android:id="@+id/blank_filler5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" " />
+
+                        <TextView
+                            android:id="@+id/setName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="N/A"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/Res"
@@ -376,7 +410,8 @@
                             <TextView
                                 android:id="@+id/move1Desc"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:textAppearance="@style/TextAppearance.Design.Counter" />
 
                         </LinearLayout>
 
@@ -454,7 +489,8 @@
                             <TextView
                                 android:id="@+id/move2Desc"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:textAppearance="@style/TextAppearance.Design.Counter" />
 
                         </LinearLayout>
 
@@ -532,7 +568,8 @@
                             <TextView
                                 android:id="@+id/move3Desc"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:textAppearance="@style/TextAppearance.Design.Counter" />
 
                         </LinearLayout>
 
@@ -553,17 +590,22 @@
     <LinearLayout
         android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="9"
-        android:gravity="center_vertical|center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/pressForPokemon"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Press to fetch" />
+
+        <Button
+            android:id="@+id/toSearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🔍" />
     </LinearLayout>
 
 </LinearLayout>

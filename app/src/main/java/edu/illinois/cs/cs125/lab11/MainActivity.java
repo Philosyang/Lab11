@@ -31,13 +31,15 @@ import android.view.WindowManager;
 public final class MainActivity extends AppCompatActivity {
     /** Default logging tag for messages from the main activity. */
     private static final String TAG = "Pokemon-TCG:Main";
+    private static String lookUpId;
+    private static String cardInSet;
 
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
     /** Name variable entered by client **/
-    String readPokemonName;
-    EditText input;
-    Button search;
+    private String readPokemonName;
+    private EditText input;
+    private Button search;
     /**
      * Run when this activity comes to the foreground.
      *
@@ -46,9 +48,9 @@ public final class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         // remove actionBar.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
@@ -65,11 +67,8 @@ public final class MainActivity extends AppCompatActivity {
                 // pop up a Toast to provide feedback after pressing the button.
                 Toast.makeText(MainActivity.this,
                         "Fetching data...", Toast.LENGTH_SHORT).show();
-                // random ID generator.
-                String id = "?name=" + readPokemonName;
-                Log.d(TAG, id);
                 // start API call.
-                startAPICall(id);
+                startAPICall(lookUpId);
             }
         });
         // Display card back.
@@ -88,10 +87,29 @@ public final class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,
                         "Fetching data...", Toast.LENGTH_SHORT).show();
                 // random ID generator.
-                String id = "/sm75-" + (int) (Math.random() * 69 + 1);
-                Log.d(TAG, id);
+                try {
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                            Request.Method.GET,
+                            "https://api.pokemontcg.io/v1/sets",
+                            null,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(final JSONObject response) {
+                                    randomSet(response);
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(final VolleyError error) {
+                            Log.e(TAG, error.toString());
+                        }
+                    });
+                    jsonObjectRequest.setShouldCache(false);
+                    requestQueue.add(jsonObjectRequest);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 // start API call.
-                startAPICall(id);
+                startAPICall(lookUpId);
             }
         });
     }
@@ -113,7 +131,7 @@ public final class MainActivity extends AppCompatActivity {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "https://api.pokemontcg.io/v1/cards" + id,
+                    "https://api.pokemontcg.io/v1/cards/" + id,
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -169,6 +187,15 @@ public final class MainActivity extends AppCompatActivity {
                 hP.setText("");
                 TextView hPnumber = findViewById(R.id.hPnumber);
                 hPnumber.setText("");
+            }
+            // Display set.
+            try {
+                TextView setName = findViewById(R.id.setName);
+                setName.setText(cardInSet);
+                Log.i(TAG, "set = " + setName);
+            } catch (Exception e) {
+                TextView setName = findViewById(R.id.setName);
+                setName.setText("N/A");
             }
             // Display weakMultiplier.
             try {
@@ -387,6 +414,20 @@ public final class MainActivity extends AppCompatActivity {
                 return R.drawable.type_fairy;
             default:
                 return 0;
+        }
+    }
+
+    void randomSet(final JSONObject response) {
+        try {
+            JSONArray sets = response.getJSONArray("sets");
+            JSONObject set = sets.getJSONObject((int) (Math.random() * 96 + 1));
+            Log.d(TAG, "randomSet.set = " + set.toString());
+            cardInSet = set.get("name").toString();
+            Log.d(TAG, "variable: cardInSet = " + cardInSet);
+            lookUpId = set.get("code").toString() + "-" + (int) (Math.random() * ((int) set.get("totalCards") - 1) + 1);
+            Log.d(TAG, "variable: lookUpId = " + lookUpId);
+        } catch (Exception e) {
+            Log.d(TAG, "Random set error: " + e.toString());
         }
     }
 }

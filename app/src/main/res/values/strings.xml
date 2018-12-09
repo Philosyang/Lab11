@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Pokemon TCG</string>
+    <!--<string-array name="set_list">
+        <item>Base</item>
+        <item>Jungle</item>
+        <item>Wizards Black Star Promos</item>
+        <item>Fossil</item>
+        <item>Base Set 2</item>
+        <item>Team Rocket</item>
+        <item>Gym Heroes</item>
+        <item></item>
+    </string-array>-->
 </resources>
