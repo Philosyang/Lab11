@@ -103,11 +103,16 @@ public final class MainActivity extends AppCompatActivity {
                         + "photos/63287/pkm-cardback.png").into(temp);
         // pop up a Toast to show that the app is ready.
         Toast.makeText(MainActivity.this,
-                "Click on the button to get started.", Toast.LENGTH_LONG).show();
+                "Ready!", Toast.LENGTH_LONG).show();
         Button button = findViewById(R.id.pressForPokemon);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 Log.d(TAG, "button clicked");
+                // clears searchBar and searchDial.
+                EditText searchBar = findViewById(R.id.searchBar);
+                searchBar.getText().clear();
+                ((TextView) findViewById(R.id.searchDialCurrent)).setText("N");
+                ((TextView) findViewById(R.id.searchDialTotal)).setText("A");
                 // pop up a Toast to provide feedback after pressing the button.
                 Toast.makeText(MainActivity.this,
                         "Fetching data...", Toast.LENGTH_SHORT).show();
