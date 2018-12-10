@@ -31,8 +31,9 @@ import android.view.WindowManager;
 public final class MainActivity extends AppCompatActivity {
     /** Default logging tag for messages from the main activity. */
     private static final String TAG = "Pokemon-TCG:Main";
-    private static String lookUpId;
-    private static String cardInSet;
+    private String lookUpId = "pl4-71";
+    private String cardInSet = "Arceus";
+    private boolean isSearch = false;
 
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
@@ -68,7 +69,7 @@ public final class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,
                         "Fetching data...", Toast.LENGTH_SHORT).show();
                 // start API call.
-                startAPICall(lookUpId);
+                startAPICall("?name=" + readPokemonName);
             }
         });
         // Display card back.
@@ -95,6 +96,7 @@ public final class MainActivity extends AppCompatActivity {
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(final JSONObject response) {
+                                    Log.d(TAG, "execute on response");
                                     randomSet(response);
                                 }
                             }, new Response.ErrorListener() {
@@ -106,10 +108,11 @@ public final class MainActivity extends AppCompatActivity {
                     jsonObjectRequest.setShouldCache(false);
                     requestQueue.add(jsonObjectRequest);
                 } catch (Exception e) {
+                    Log.d(TAG, "error caught upon clicking button");
                     e.printStackTrace();
                 }
                 // start API call.
-                startAPICall(lookUpId);
+                startAPICall("/" + lookUpId);
             }
         });
     }
@@ -131,12 +134,17 @@ public final class MainActivity extends AppCompatActivity {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "https://api.pokemontcg.io/v1/cards/" + id,
+                    "https://api.pokemontcg.io/v1/cards" + id,
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(final JSONObject response) {
-                            apiCallDone(response);
+                            try {
+                                JSONArray arr = response.getJSONArray("cards");
+                                apiCallDoneSearch(response);
+                            } catch (Exception e) {
+                                apiCallDone(response);
+                            }
                         }
                     }, new Response.ErrorListener() {
                         @Override
@@ -159,7 +167,13 @@ public final class MainActivity extends AppCompatActivity {
         try {
             Log.d(TAG, response.toString(2));
             // Create JSONObject card.
-            JSONObject card = response.getJSONObject("card");
+            JSONObject card;
+            if (isSearch) {
+                card = response;
+            } else {
+                card = response.getJSONObject("card");
+            }
+            isSearch = false;
             // Display pokemonName.
             TextView pokemonName = findViewById(R.id.pokemonName);
             pokemonName.setText(card.get("name").toString());
@@ -404,9 +418,9 @@ public final class MainActivity extends AppCompatActivity {
                 return R.drawable.type_psychic;
             case "Colorless":
                 return R.drawable.type_normal;
-            case "Steel":
+            case "Metal":
                 return R.drawable.type_steel;
-            case "Dark":
+            case "Darkness":
                 return R.drawable.type_dark;
             case "Dragon":
                 return R.drawable.type_dragon;
@@ -428,6 +442,16 @@ public final class MainActivity extends AppCompatActivity {
             Log.d(TAG, "variable: lookUpId = " + lookUpId);
         } catch (Exception e) {
             Log.d(TAG, "Random set error: " + e.toString());
+        }
+    }
+    void apiCallDoneSearch(JSONObject response) {
+        try {
+            JSONArray arr = response.getJSONArray("cards");
+            JSONObject obj = arr.getJSONObject(0);
+            isSearch = true;
+            apiCallDone(obj);
+        } catch (Exception e) {
+            Log.d(TAG, "apiCallDoneSearch error: " + e.toString());
         }
     }
 }
