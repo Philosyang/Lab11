@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/poketcgbg"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -144,6 +145,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:baselineAligned="false"
                             android:gravity="center_vertical|center_horizontal"
                             android:orientation="horizontal">
 
@@ -183,6 +186,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:background="@android:color/transparent"
                             android:gravity="center_vertical|center_horizontal"
                             android:orientation="horizontal">
 
@@ -222,6 +226,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
+                            android:background="@android:color/transparent"
                             android:gravity="center_vertical|center_horizontal"
                             android:orientation="horizontal">
 
@@ -363,6 +368,7 @@
                                 android:id="@+id/move1Desc"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
                                 android:textAppearance="@style/TextAppearance.Design.Counter" />
 
                         </LinearLayout>
@@ -442,6 +448,7 @@
                                 android:id="@+id/move2Desc"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
                                 android:textAppearance="@style/TextAppearance.Design.Counter" />
 
                         </LinearLayout>
@@ -521,6 +528,7 @@
                                 android:id="@+id/move3Desc"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
                                 android:textAppearance="@style/TextAppearance.Design.Counter" />
 
                         </LinearLayout>
