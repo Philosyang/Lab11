@@ -35,6 +35,10 @@ public final class MainActivity extends AppCompatActivity {
     private String cardInSet = "Arceus";
     private boolean isSearch = false;
     private String cardSetImageUrl = "https://images.pokemontcg.io/pl4/logo.png";
+    private int searchDialCurrent = 1;
+    private int searchDialTotal = 1;
+    private JSONArray tempArr;
+    private int arrIndex = 0;
 
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
@@ -75,6 +79,7 @@ public final class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,
                             "Fetching data...", Toast.LENGTH_SHORT).show();
                     // start API call.
+                    arrIndex = 0;
                     startAPICall("?name=" + readPokemonName);
                 }
             }
@@ -120,6 +125,34 @@ public final class MainActivity extends AppCompatActivity {
                 }
                 // start API call.
                 startAPICall("/" + lookUpId);
+            }
+        });
+        Button prev = findViewById(R.id.searchLeft);
+        Button next = findViewById(R.id.searchRight);
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    arrIndex -= 1;
+                    isSearch = true;
+                    ((TextView) findViewById(R.id.searchDialCurrent)).setText(String.valueOf(arrIndex + 1));
+                    apiCallDone(tempArr.getJSONObject(arrIndex));
+                } catch (Exception e) {
+                    Log.d(TAG, "Previous ERROR: " + e.toString());
+                }
+            }
+        });
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    arrIndex += 1;
+                    isSearch = true;
+                    ((TextView) findViewById(R.id.searchDialCurrent)).setText(String.valueOf(arrIndex + 1));
+                    apiCallDone(tempArr.getJSONObject(arrIndex));
+                } catch (Exception e) {
+                    Log.d(TAG, "Previous ERROR: " + e.toString());
+                }
             }
         });
     }
@@ -454,6 +487,10 @@ public final class MainActivity extends AppCompatActivity {
     void apiCallDoneSearch(JSONObject response) {
         try {
             JSONArray arr = response.getJSONArray("cards");
+            tempArr = arr;
+            searchDialTotal = arr.length();
+            ((TextView) findViewById(R.id.searchDialCurrent)).setText(String.valueOf(searchDialCurrent));
+            ((TextView) findViewById(R.id.searchDialTotal)).setText(String.valueOf(searchDialTotal));
             JSONObject obj = arr.getJSONObject(0);
             isSearch = true;
             apiCallDone(obj);
