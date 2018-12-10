@@ -34,6 +34,7 @@ public final class MainActivity extends AppCompatActivity {
     private String lookUpId = "pl4-71";
     private String cardInSet = "Arceus";
     private boolean isSearch = false;
+    private String cardSetImageUrl = "https://images.pokemontcg.io/pl4/logo.png";
 
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
@@ -65,11 +66,17 @@ public final class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 readPokemonName = input.getText().toString();
                 Log.d(TAG, "search clicked");
-                // pop up a Toast to provide feedback after pressing the button.
-                Toast.makeText(MainActivity.this,
-                        "Fetching data...", Toast.LENGTH_SHORT).show();
-                // start API call.
-                startAPICall("?name=" + readPokemonName);
+                if (readPokemonName.length() == 0) {
+                    // halt user's operation.
+                    Toast.makeText(MainActivity.this,
+                            "WARNING: Empty input!", Toast.LENGTH_LONG).show();
+                } else {
+                    // pop up a Toast to provide feedback after pressing the button.
+                    Toast.makeText(MainActivity.this,
+                            "Fetching data...", Toast.LENGTH_SHORT).show();
+                    // start API call.
+                    startAPICall("?name=" + readPokemonName);
+                }
             }
         });
         // Display card back.
@@ -204,12 +211,10 @@ public final class MainActivity extends AppCompatActivity {
             }
             // Display set.
             try {
-                TextView setName = findViewById(R.id.setName);
-                setName.setText(cardInSet);
-                Log.i(TAG, "set = " + setName);
+                ImageView cardSetImage = findViewById(R.id.cardSetImage);
+                Picasso.with(MainActivity.this).load(cardSetImageUrl).into(cardSetImage);
             } catch (Exception e) {
-                TextView setName = findViewById(R.id.setName);
-                setName.setText("N/A");
+
             }
             // Display weakMultiplier.
             try {
@@ -438,6 +443,8 @@ public final class MainActivity extends AppCompatActivity {
             Log.d(TAG, "randomSet.set = " + set.toString());
             cardInSet = set.get("name").toString();
             Log.d(TAG, "variable: cardInSet = " + cardInSet);
+            cardSetImageUrl = set.get("logoUrl").toString();
+            Log.d(TAG, "variable: cardSetImageUrl = " + cardSetImageUrl);
             lookUpId = set.get("code").toString() + "-" + (int) (Math.random() * ((int) set.get("totalCards") - 1) + 1);
             Log.d(TAG, "variable: lookUpId = " + lookUpId);
         } catch (Exception e) {

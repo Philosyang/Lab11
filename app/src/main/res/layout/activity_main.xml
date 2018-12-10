@@ -19,12 +19,12 @@
             android:id="@+id/searchBarFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="top"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/searchBar"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:ems="10"
@@ -37,8 +37,54 @@
                 android:id="@+id/searchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="10"
                 android:text="GO" />
+
+            <TextView
+                android:id="@+id/blank_filler6"
+                android:layout_width="8dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/searchLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="◀" />
+
+            <LinearLayout
+                android:id="@+id/searchDialLayout"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/searchDialCurrent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="N" />
+
+                <TextView
+                    android:id="@+id/searchDialSlash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/" />
+
+                <TextView
+                    android:id="@+id/searchDialTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/searchRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:text="▶" />
 
         </LinearLayout>
 
@@ -136,28 +182,14 @@
                         android:id="@+id/inSet"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="top|center_horizontal"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/in"
+                        <ImageView
+                            android:id="@+id/cardSetImage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="in"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-
-                        <TextView
-                            android:id="@+id/blank_filler5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" " />
-
-                        <TextView
-                            android:id="@+id/setName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="N/A"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+                            tools:srcCompat="@tools:sample/avatars" />
 
                     </LinearLayout>
 
@@ -598,14 +630,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Press to fetch" />
+            android:text="FETCH RANDOM" />
 
-        <Button
-            android:id="@+id/toSearchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="🔍" />
     </LinearLayout>
 
 </LinearLayout>
