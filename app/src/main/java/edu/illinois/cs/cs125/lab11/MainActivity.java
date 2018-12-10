@@ -108,9 +108,7 @@ public final class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 Log.d(TAG, "button clicked");
-                // clears searchBar and searchDial.
-                EditText searchBar = findViewById(R.id.searchBar);
-                searchBar.getText().clear();
+                // clears searchDial.
                 ((TextView) findViewById(R.id.searchDialCurrent)).setText("N");
                 ((TextView) findViewById(R.id.searchDialTotal)).setText("A");
                 // pop up a Toast to provide feedback after pressing the button.
@@ -245,6 +243,9 @@ public final class MainActivity extends AppCompatActivity {
             TextView pokemonName = findViewById(R.id.pokemonName);
             pokemonName.setText(card.get("name").toString());
             Log.i(TAG, "pokemonName = " + card.get("name").toString());
+            // put pokemonName to searchBar.
+            EditText searchBar = findViewById(R.id.searchBar);
+            searchBar.setText(card.get("name").toString());
             // Display type.
             ImageView pokemonType = findViewById(R.id.pokemonType);
             try {
