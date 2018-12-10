@@ -1,5 +1,6 @@
 package edu.illinois.cs.cs125.lab11;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 /**
  * Main class for our UI design lab.
@@ -68,6 +70,16 @@ public final class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Closes virtual keyboard on button click.
+                try {
+                    InputMethodManager inputManager = (InputMethodManager)
+                            getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                } catch (Exception e) {
+                    //stub.
+                }
                 readPokemonName = input.getText().toString();
                 Log.d(TAG, "search clicked");
                 if (readPokemonName.length() == 0) {
@@ -437,10 +449,10 @@ public final class MainActivity extends AppCompatActivity {
             Picasso.with(MainActivity.this).load(card.get("imageUrlHiRes").toString()).into(tempD);
             // Display a success or alternative Toast.
             if (altToast == -1) {
-                Toast.makeText(MainActivity.this, "Bound reached, searching from the end.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Searching from the end.", Toast.LENGTH_SHORT).show();
                 altToast = 0;
             } else if (altToast == 1) {
-                Toast.makeText(MainActivity.this, "Bound reached, searching from the beginning.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Searching from the beginning.", Toast.LENGTH_SHORT).show();
                 altToast = 0;
             } else {
                 Toast.makeText(MainActivity.this, "√", Toast.LENGTH_SHORT).show();
