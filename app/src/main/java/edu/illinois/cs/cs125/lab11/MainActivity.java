@@ -34,11 +34,11 @@ public final class MainActivity extends AppCompatActivity {
     private String lookUpId = "pl4-71";
     private String cardInSet = "Arceus";
     private boolean isSearch = false;
-    private String cardSetImageUrl = "https://images.pokemontcg.io/pl4/logo.png";
-    private int searchDialCurrent = 1;
     private int searchDialTotal = 1;
     private JSONArray tempArr;
     private int arrIndex = 0;
+    /** specifically set up if search reaches the end / beginning, gives out an alternative Toast. **/
+    private int altToast = 0;
 
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
@@ -133,7 +133,12 @@ public final class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    arrIndex -= 1;
+                    if (arrIndex == 0) {
+                        arrIndex = searchDialTotal - 1;
+                        altToast = -1;
+                    } else {
+                        arrIndex -= 1;
+                    }
                     isSearch = true;
                     ((TextView) findViewById(R.id.searchDialCurrent)).setText(String.valueOf(arrIndex + 1));
                     apiCallDone(tempArr.getJSONObject(arrIndex));
@@ -146,7 +151,12 @@ public final class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    arrIndex += 1;
+                    if (arrIndex == searchDialTotal - 1) {
+                        arrIndex = 0;
+                        altToast = 1;
+                    } else {
+                        arrIndex += 1;
+                    }
                     isSearch = true;
                     ((TextView) findViewById(R.id.searchDialCurrent)).setText(String.valueOf(arrIndex + 1));
                     apiCallDone(tempArr.getJSONObject(arrIndex));
@@ -245,7 +255,7 @@ public final class MainActivity extends AppCompatActivity {
             // Display set.
             try {
                 ImageView cardSetImage = findViewById(R.id.cardSetImage);
-                Picasso.with(MainActivity.this).load(cardSetImageUrl).into(cardSetImage);
+                Picasso.with(MainActivity.this).load("https://images.pokemontcg.io/" + card.get("setCode").toString() + "/logo.png").into(cardSetImage);
             } catch (Exception e) {
 
             }
@@ -425,14 +435,21 @@ public final class MainActivity extends AppCompatActivity {
             // Display pokemonImage.
             ImageView tempD = findViewById(R.id.pokemonImage);
             Picasso.with(MainActivity.this).load(card.get("imageUrlHiRes").toString()).into(tempD);
-            // Display a success Toast.
-            Toast.makeText(MainActivity.this,
-                    "√", Toast.LENGTH_SHORT).show();
+            // Display a success or alternative Toast.
+            if (altToast == -1) {
+                Toast.makeText(MainActivity.this, "Bound reached, searching from the end.", Toast.LENGTH_SHORT).show();
+                altToast = 0;
+            } else if (altToast == 1) {
+                Toast.makeText(MainActivity.this, "Bound reached, searching from the beginning.", Toast.LENGTH_SHORT).show();
+                altToast = 0;
+            } else {
+                Toast.makeText(MainActivity.this, "√", Toast.LENGTH_SHORT).show();
+            }
         } catch (JSONException e) {
             Log.i(TAG, "caught ERROR! " + e.toString());
             // Display a failing Toast.
             Toast.makeText(MainActivity.this,
-                    "Something went wrong!", Toast.LENGTH_SHORT).show();
+                    "Something went wrong!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -476,8 +493,6 @@ public final class MainActivity extends AppCompatActivity {
             Log.d(TAG, "randomSet.set = " + set.toString());
             cardInSet = set.get("name").toString();
             Log.d(TAG, "variable: cardInSet = " + cardInSet);
-            cardSetImageUrl = set.get("logoUrl").toString();
-            Log.d(TAG, "variable: cardSetImageUrl = " + cardSetImageUrl);
             lookUpId = set.get("code").toString() + "-" + (int) (Math.random() * ((int) set.get("totalCards") - 1) + 1);
             Log.d(TAG, "variable: lookUpId = " + lookUpId);
         } catch (Exception e) {
@@ -489,7 +504,7 @@ public final class MainActivity extends AppCompatActivity {
             JSONArray arr = response.getJSONArray("cards");
             tempArr = arr;
             searchDialTotal = arr.length();
-            ((TextView) findViewById(R.id.searchDialCurrent)).setText(String.valueOf(searchDialCurrent));
+            ((TextView) findViewById(R.id.searchDialCurrent)).setText(String.valueOf(arrIndex + 1));
             ((TextView) findViewById(R.id.searchDialTotal)).setText(String.valueOf(searchDialTotal));
             JSONObject obj = arr.getJSONObject(0);
             isSearch = true;

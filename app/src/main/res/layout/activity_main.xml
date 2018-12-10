@@ -111,13 +111,6 @@
                     tools:srcCompat="@android:color/holo_green_light" />
 
                 <LinearLayout
-                    android:id="@+id/blank_filler1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="35"
-                    android:orientation="vertical"></LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/NameType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
